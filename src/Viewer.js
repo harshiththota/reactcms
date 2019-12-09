@@ -11,13 +11,15 @@ import {
   TableCell
 } from '@material-ui/core';
 import withStyles from '@material-ui/core/styles/withStyles';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import LangCard from './LangCard';
 
 const styles = (theme) => {
   return {
     viewer: {
+      backgroundColor: 'lightgrey'
     },
     headerContainer: {
-      backgroundColor: "skyblue",
     },
     headerText: {
       paddingLeft: 30,
@@ -25,7 +27,7 @@ const styles = (theme) => {
       paddingBottom: 10
     },
     subHeaderContainer: {
-      backgroundColor: "grey",
+      backgroundColor: 'darkblue',
     },
     subHeaderText: {
       paddingLeft: 30,
@@ -44,14 +46,23 @@ const styles = (theme) => {
       paddingTop: 10,
       paddingBottom: 15
     },
+    inputContainerHeadingContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      color: 'blue'
+    },
     inputHeadingText: {
       paddingTop: 15,
       fontSize: 15,
       paddingBottom: 20
     },
+    inputLabelContainer: {
+    },
     inputHeadingLabel: {
       paddingBottom: 10,
       fontSize: 10,
+      fontStyle: 'bold'
     },
     textField: {
       width: 400,
@@ -62,10 +73,23 @@ const styles = (theme) => {
     checkboxContainer: {
       display: 'flex',
       flexDirection: 'row',
+      alignItems: 'center',
+      paddingTop: 15,
+      paddingLeft: 10,
+    },
+    inputLabelText: {
+      fontSize: 15,
     },
     recordContainer: {
       display: 'flex',
       flexDirection: 'row',
+      paddingTop: 20
+    },
+    langInputContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center'
     },
     langInput: {
       marginLeft: 20,
@@ -123,7 +147,6 @@ class Viewer extends Component {
     this.setState({ checked });
   };
 
-
   render() {
     const { classes } = this.props;
     return (
@@ -136,12 +159,14 @@ class Viewer extends Component {
           <Typography className={classes.subHeaderText1}>{"LOGIN_ERROR MPIN"}</Typography>
         </div>
         <div className={classes.inputContainer}>
-          <div>
+          <div className={classes.inputContainerHeadingContainer}>
             <Typography className={classes.inputHeadingText}>{"ADD NEW RECORD"}</Typography>
+            <ExpandLessIcon />
           </div>
-          <div>
+          <div className={classes.inputLabelContainer}>
             <Typography className={classes.inputHeadingLabel}>{"ENTER RECORD ID"}</Typography>
-            <TextField className={classes.textField} id="outlined-basic" variant="outlined" />
+            <TextField className={classes.textField} id="outlined-basic" variant="outlined"
+            style={{ height: 25, width: 300 }}/>
           </div>
           <div className={classes.checkboxContainer}>
             <Typography className={classes.inputHeadingLabel}>{"ENTER RECORD CONTENT"}</Typography>
@@ -150,50 +175,21 @@ class Viewer extends Component {
               checked={this.state.checked}
               onChange={this.handleCheckboxChange}
             />
+            <Typography className={classes.inputLabelText}>{"Make it speakable"}</Typography>
           </div>
           <div className={classes.recordContainer}>
-            <div className={classes.langContainer}>
-              <Typography className={classes.langInputLabel}>{"English"}</Typography>
-              <TextField className={classes.langInput} id="outlined-basic" variant="outlined" multiline />
-            </div>
-            <div>
-              <Typography className={classes.langInputLabel}>{"Hindi"}</Typography>
-              <TextField className={classes.langInput} id="outlined-basic" variant="outlined" multiline />
-            </div>
-            <div>
-              <Typography className={classes.langInputLabel}>{"Kannada"}</Typography>
-              <TextField className={classes.langInput} id="outlined-basic" variant="outlined" multiline />
-            </div>
-            <div>
-              <Typography className={classes.langInputLabel}>{"Marathi"}</Typography>
-              <TextField className={classes.langInput} id="outlined-basic" variant="outlined" multiline />
-            </div>
-            <div>
-              <Typography className={classes.langInputLabel}>{"Oriya"}</Typography>
-              <TextField className={classes.langInput} id="outlined-basic" variant="outlined" multiline />
-            </div>
+            <LangCard lang="English" />
+            <LangCard lang="Hindi" />
+            <LangCard lang="Kannada" />
+            <LangCard lang="Marathi" />
+            <LangCard lang="Oriya" />
           </div>
           <div className={classes.recordContainer}>
-            <div className={classes.langContainer}>
-              <Typography className={classes.langInputLabel}>{"English"}</Typography>
-              <TextField className={classes.langInput} id="outlined-basic" variant="outlined" multiline />
-            </div>
-            <div>
-              <Typography className={classes.langInputLabel}>{"Hindi"}</Typography>
-              <TextField className={classes.langInput} id="outlined-basic" variant="outlined" multiline />
-            </div>
-            <div>
-              <Typography className={classes.langInputLabel}>{"Kannada"}</Typography>
-              <TextField className={classes.langInput} id="outlined-basic" variant="outlined" multiline />
-            </div>
-            <div>
-              <Typography className={classes.langInputLabel}>{"Marathi"}</Typography>
-              <TextField className={classes.langInput} id="outlined-basic" variant="outlined" multiline />
-            </div>
-            <div>
-              <Typography className={classes.langInputLabel}>{"Oriya"}</Typography>
-              <TextField className={classes.langInput} id="outlined-basic" variant="outlined" multiline />
-            </div>
+            <LangCard lang="Speakable Content in English" />
+            <LangCard lang="Speakable Content in Hindi" />
+            <LangCard lang="Speakable Content in Kannada" />
+            <LangCard lang="Speakable Content in Marathi" />
+            <LangCard lang="Speakable Content in Oriya" />
           </div>
           <div className={classes.ButtonContainer}>
             <Button variant="contained" size="large" color="primary">
@@ -203,8 +199,8 @@ class Viewer extends Component {
         </div>
         <hr
           style={{
-            color: "grey",
-            backgroundColor: "white",
+            color: "black",
+            backgroundColor: "lightgrey",
             height: 5
           }}
         />
@@ -226,8 +222,8 @@ class Viewer extends Component {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {TABLE_DATA.map(row => (
-                  <TableRow key={row.name}>
+                {TABLE_DATA.map((row, index) => (
+                  <TableRow key={row.index}>
                     <TableCell component="th" scope="row">
                       {row.index}
                     </TableCell>
