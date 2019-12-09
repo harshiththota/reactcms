@@ -1,0 +1,24 @@
+.viewer {
+  background-color: red;
+  flex: 1%;
+}
+
+.headerContainer {
+  background-color: skyblue;
+  flex: 1%;
+}
+
+.subHeaderContainer {
+  background-color: grey;
+  flex: 1.5%;
+}
+
+.inputContainer {
+  background-color: lightgreen;
+  flex: 3%;
+}
+
+.recordsContainer {
+  background-color: lightyellow;
+  flex: 3%;
+}
